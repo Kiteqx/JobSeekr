@@ -11,13 +11,15 @@
 
 #### Please delete options that are not relevant.
 
-- [ ] New feature
-- [ ] Bug fix
-- [ ] Docs
-- [ ] Code style update (formatting, local variables)
-- [ ] Refactoring (no functional changes, no api changes)
-- [ ] Tests
-- [ ] Other
+This is a:
+
+- [x] New feature
+- [x] Bug fix
+- [x] Docs
+- [x] Code style update (formatting, local variables)
+- [x] Refactoring (no functional changes, no api changes)
+- [x] Tests
+- [x] Other
 
 ---
 
