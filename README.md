@@ -19,7 +19,7 @@ This application offers the following key features:
 
 ## How users can get started with the project
 
-To get started with this project, follow this [steps]().
+To get started with this project, follow this [steps](https://github.com/DiegoKitty/JobSeekr/tree/develop#readme).
 
 ## Where users can get help with the project
 
