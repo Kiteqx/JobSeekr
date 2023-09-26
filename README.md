@@ -5,7 +5,7 @@ Welcome to [JobSeekr application]()! This application provides users with a conv
 
 ## What the project does
 
-This eCommerce application offers the following key features:
+This application offers the following key features:
 
 - **User Authentication**: The application provides user registration and login 🔐 functionality, ensuring a personalized and secure experience.
 
@@ -19,7 +19,7 @@ This eCommerce application offers the following key features:
 
 ## How users can get started with the project
 
-To get started with this eCommerce application, follow this [steps]().
+To get started with this project, follow this [steps]().
 
 ## Where users can get help with the project
 
