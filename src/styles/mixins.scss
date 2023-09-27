@@ -1,0 +1,5 @@
+@mixin BtnHover($fontColor: null, $backgroundColor: null, $boxShadow: null) {
+  color: $fontColor;
+  background-color: $backgroundColor;
+  box-shadow: $boxShadow;
+}
