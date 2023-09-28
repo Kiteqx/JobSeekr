@@ -1,0 +1,76 @@
+.main,
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main {
+  padding: 20px 0px;
+  gap: 30px;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  min-height: 80vh;
+}
+
+.info {
+  width: 100%;
+  max-width: 640px;
+}
+
+.infoHeading {
+  font-weight: 700;
+}
+
+.infoHeadingSpan {
+  color: $primary-500;
+}
+
+.descriptionText {
+  font-size: 16px;
+}
+
+.authBtn {
+  align-self: start;
+  font-size: 16px;
+  transition: $transition;
+}
+
+.previewImg {
+  width: 100%;
+  max-width: 400px;
+}
+
+@media screen and (max-width: $tablet) {
+  .logo-container {
+    gap: 10px;
+  }
+
+  .logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .logoHeading {
+    font-size: 16px;
+  }
+
+  .infoContainer {
+    flex-wrap: wrap;
+  }
+
+  .infoHeading {
+    font-size: 2rem;
+  }
+
+  .previewImg {
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
