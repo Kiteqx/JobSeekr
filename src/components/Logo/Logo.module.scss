@@ -1,0 +1,44 @@
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  transition: $transition;
+}
+
+.logoHeading {
+  font-size: 24px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: $black;
+  transition: $transition;
+}
+
+@media (hover: hover) {
+  .logoContainer:hover .logoHeading {
+    color: $green-dark;
+  }
+
+  .logoContainer:hover .logo {
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .logo-container {
+    gap: 10px;
+  }
+
+  .logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .logoHeading {
+    font-size: 16px;
+  }
+}
