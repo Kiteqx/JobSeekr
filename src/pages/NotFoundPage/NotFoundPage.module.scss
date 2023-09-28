@@ -1,0 +1,28 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.notFoundImg {
+  width: 90vw;
+  max-width: 600px;
+  display: block;
+  margin-bottom: 32px;
+}
+
+.heading {
+  margin-bottom: 8px;
+}
+
+.description {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: $grey-500;
+}
+
+.toHomeLink {
+  font-size: 20px;
+}
