@@ -1,26 +1,26 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   transition: $transition;
 }
 
 .logoHeading {
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: 2px;
   font-weight: 700;
-  color: $black;
+  color: $primary-600;
   transition: $transition;
 }
 
 @media (hover: hover) {
   .logoContainer:hover .logoHeading {
-    color: $green-dark;
+    color: $hover-color;
   }
 
   .logoContainer:hover .logo {
