@@ -1,0 +1,53 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.formLogo {
+  justify-content: center !important;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  max-width: 400px;
+  border-top: 5px solid $primary-500;
+}
+
+.formHeading {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.btn {
+  margin-top: 2rem;
+}
+
+.redirectBtnContainer {
+  margin: 0;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.memberBtn {
+  margin-left: 0.5rem;
+  background: transparent;
+  border: transparent;
+  color: $primary-500;
+  letter-spacing: 1px;
+  transition: $transition;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .memberBtn:hover {
+    color: $hover-color;
+  }
+}
