@@ -1,11 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
 import React from 'react';
-import { LandingPage, NotFoundPage } from './lazyPages';
+import { LandingPage, AuthPage, NotFoundPage } from './lazyPages';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LandingPage />,
+  },
+  {
+    path: '/auth',
+    element: <AuthPage />,
   },
   {
     path: '*',
