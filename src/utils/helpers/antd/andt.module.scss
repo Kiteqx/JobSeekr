@@ -1,0 +1,17 @@
+.exitBtn {
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  transition: $transition;
+}
+
+.messageContainer {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+@media (hover: hover) {
+  .exitBtn:hover {
+    transform: scale(1.2);
+  }
+}
