@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { IFormRowProps } from '@/interfaces/componentIterfaces';
+import { IFormRowProps } from '@/interfaces/IComponents';
 import styles from './FormRow.module.scss';
 
 const FormRow = ({ type, name, value, labelText, handleInputChange }: IFormRowProps): ReactElement => {
