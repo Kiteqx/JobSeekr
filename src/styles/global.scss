@@ -118,6 +118,14 @@ h5 {
   transition: $transition;
 }
 
+input:focus {
+  outline: 1px solid $primary-500;
+}
+
+button:focus {
+  outline: 1px solid $green-dark;
+}
+
 .form-textarea,
 .form-select {
   padding: 0.375rem 0.75rem;
