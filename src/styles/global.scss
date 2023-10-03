@@ -123,7 +123,9 @@ input:focus {
 }
 
 button:focus {
-  outline: 1px solid $green-dark;
+  outline-offset: 2px;
+  outline: 1px solid $focus-color;
+  border-radius: 3px;
 }
 
 .form-textarea,
