@@ -63,7 +63,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         type="submit"
         disabled={
           isLoading ||
-          !Object.entries(inputValues).some(([, inputValue]) => !!inputValue) ||
+          Object.entries(inputValues).some(([, inputValue]) => !inputValue) ||
           Object.entries(validateMessages).some(([, errorMessage]) => !!errorMessage)
         }
       >
