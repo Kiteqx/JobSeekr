@@ -25,3 +25,8 @@ export const NotFoundPage = LazyComponent(async () => {
   await delay();
   return import(/* webpackChunkName: "pages/not-found/not-found" */ '@/pages/NotFoundPage/NotFoundPage');
 });
+
+export const AuthPage = LazyComponent(async () => {
+  await delay();
+  return import(/* webpackChunkName: "pages/auth/auth" */ '@/pages/AuthPage/AuthPage');
+});
