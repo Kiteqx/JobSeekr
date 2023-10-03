@@ -5,17 +5,14 @@ export interface IFormRowProps {
   name: string;
   value: string;
   labelText?: string;
+  placeholder: string;
+  validateMessage?: string;
+  autoFocus?: boolean;
   handleInputChange: (event: ChangeEvent) => void;
 }
 
-export interface IAuthInputValues {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export interface IAuthFormProps {
-  inputValues: IAuthInputValues;
+  inputValues: Record<string, string>;
   setIsMember: Dispatch<SetStateAction<boolean>>;
-  setInputValues: Dispatch<SetStateAction<IAuthInputValues>>;
+  setInputValues: Dispatch<SetStateAction<Record<string, string>>>;
 }
