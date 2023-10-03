@@ -14,14 +14,37 @@ notification.config({
   ),
 });
 
-const showNotification = (description: string): void => {
+const configObj = {
+  className: styles.messageContainer,
+  duration: 3,
+  message: '',
+  description: '',
+  placement: 'topRight',
+};
+
+export const showNotification = (description: string): void => {
   notification.info({
+    ...configObj,
     message: `Notification!`,
-    className: styles.messageContainer,
-    duration: 3,
     description,
     placement: 'topRight',
   });
 };
 
-export default showNotification;
+export const showError = (description: string): void => {
+  notification.error({
+    ...configObj,
+    message: `Error!`,
+    description,
+    placement: 'topRight',
+  });
+};
+
+export const showSuccsess = (description: string): void => {
+  notification.success({
+    ...configObj,
+    message: `Success!`,
+    description,
+    placement: 'topRight',
+  });
+};
