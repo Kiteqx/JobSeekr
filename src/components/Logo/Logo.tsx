@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import styles from './Logo.module.scss';
 import logo from '@/assets/images/png/logo.png';
 
-const Logo = ({ className }: { className?: string }): ReactElement => {
+const Logo = ({ className = '' }: { className?: string }): ReactElement => {
   return (
-    <Link className={`${className || ''} ${styles.logoContainer}`} to="/home">
+    <Link className={`${className} ${styles.logoContainer}`} to="/">
       <img src={logo} alt="jobseekr logo" className={styles.logo} />
       <h1 className={`heading ${styles.logoHeading}`}>JobSeekr</h1>
     </Link>
