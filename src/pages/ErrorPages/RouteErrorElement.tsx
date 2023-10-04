@@ -10,7 +10,7 @@ const RouteErrorElement = (): ReactElement => {
         <img className={styles.notFoundImg} src={errorBoundarySVG} alt="error boundary image" />
         <h3 className={styles.heading}>Oops! Error has occurred.</h3>
         <p className={styles.description}>
-          We are working to fix it. Please reload a page or
+          We are working to fix it. Please reload a page or{' '}
           <a className={styles.supportLink} href="https://github.com/DiegoKitty/JobSeekr/issues" target="_blank">
             contact our support.
           </a>
