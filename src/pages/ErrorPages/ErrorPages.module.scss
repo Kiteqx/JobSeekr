@@ -7,11 +7,12 @@
 }
 
 .notFoundImg {
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  margin-bottom: 32px;
   width: 100%;
   height: calc(100vh - 250px);
   max-height: 470px;
-  max-width: 600px;
-  margin-bottom: 32px;
 }
 
 .heading {
