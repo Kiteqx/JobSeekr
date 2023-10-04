@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import notFoundSVG from '@/assets/images/svg/not-found.svg';
-import styles from './NotFoundPage.module.scss';
+import styles from './ErrorPages.module.scss';
 
 const NotFoundPage = (): ReactElement => {
   return (

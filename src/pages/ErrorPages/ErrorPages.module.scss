@@ -8,8 +8,10 @@
 
 .notFoundImg {
   width: 90vw;
+  min-width: 700px;
+  height: calc(100vh - 250px);
+  max-height: 470px;
   max-width: 600px;
-  display: block;
   margin-bottom: 32px;
 }
 
@@ -23,6 +25,17 @@
   color: $grey-500;
 }
 
+.supportLink {
+  color: $primary-700;
+  transition: $transition;
+}
+
 .toHomeLink {
   font-size: 20px;
+}
+
+@media (hover:hover) {
+  .supportLink:hover {
+    color: $hover-color;
+  }
 }
