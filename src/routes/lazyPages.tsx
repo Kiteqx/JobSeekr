@@ -21,12 +21,19 @@ export const LandingPage = LazyComponent(async () => {
   return import(/* webpackChunkName: "pages/landing/landing" */ '@/pages/LandingPage/LandingPage');
 });
 
-export const NotFoundPage = LazyComponent(async () => {
-  await delay();
-  return import(/* webpackChunkName: "pages/not-found/not-found" */ '@/pages/NotFoundPage/NotFoundPage');
-});
-
 export const AuthPage = LazyComponent(async () => {
   await delay();
   return import(/* webpackChunkName: "pages/auth/auth" */ '@/pages/AuthPage/AuthPage');
+});
+
+export const NotFoundPage = LazyComponent(async () => {
+  await delay();
+  return import(/* webpackChunkName: "pages/not-found/not-found" */ '@/pages/ErrorPages/NotFoundPage');
+});
+
+export const RouteErrorElement = LazyComponent(async () => {
+  await delay();
+  return import(
+    /* webpackChunkName: "pages/route-error-page/route-error-page" */ '@/pages/ErrorPages/RouteErrorElement'
+  );
 });
