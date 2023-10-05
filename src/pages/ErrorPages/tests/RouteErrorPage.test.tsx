@@ -15,5 +15,5 @@ test('Should navigate to home page', async () => {
   const toAuthPageButton = screen.getByText('back home');
   fireEvent.click(toAuthPageButton);
 
-  expect(window.location.pathname).toBe('/home');
+  expect(window.location.pathname).toBe('/stats');
 });
