@@ -10,7 +10,7 @@ const NotFoundPage = (): ReactElement => {
         <img className={styles.notFoundImg} src={notFoundSVG} alt="not found image" />
         <h3 className={styles.heading}>Ohh! Page Not Found</h3>
         <p className={styles.description}>We can't seem to find the page you're looking for</p>
-        <Link className={`btn ${styles.toHomeLink}`} to="/home">
+        <Link className={`btn ${styles.toHomeLink}`} to="stats">
           back home
         </Link>
       </div>
