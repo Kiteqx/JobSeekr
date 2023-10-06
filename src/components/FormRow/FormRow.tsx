@@ -10,7 +10,7 @@ const FormRow = ({
   placeholder,
   validateMessage,
   autoFocus,
-  handleInputChange,
+  onInputChange,
 }: IFormRowProps): ReactElement => {
   return (
     <div className={styles.FormRow}>
@@ -24,7 +24,7 @@ const FormRow = ({
         placeholder={placeholder}
         className={styles.formInput}
         autoFocus={autoFocus || false}
-        onChange={(event): void => handleInputChange(event)}
+        onChange={(event): void => onInputChange(event)}
       />
       <p className={styles.formValidateMessage}>{validateMessage}</p>
     </div>

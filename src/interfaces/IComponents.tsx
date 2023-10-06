@@ -8,7 +8,7 @@ export interface IFormRowProps {
   placeholder: string;
   validateMessage?: string;
   autoFocus?: boolean;
-  handleInputChange: (event: ChangeEvent) => void;
+  onInputChange: (event: ChangeEvent) => void;
 }
 
 export interface IAuthFormProps {
