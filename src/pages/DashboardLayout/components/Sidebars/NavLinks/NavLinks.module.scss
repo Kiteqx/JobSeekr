@@ -1,0 +1,44 @@
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  width: 100px;
+  color: $grey-500;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  transition: $transition;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  transition: $transition;
+}
+
+.active {
+  color: $grey-900;
+}
+
+.active .icon {
+  color: $primary-500;
+}
+
+@media (hover: hover) {
+  .navLink:hover {
+    color: $hover-color;
+    transform: translateX(10%);
+  }
+
+  .navLink:hover .icon {
+    color: $primary-500;
+  }
+}
+
+@media (max-width: $large-tablet) {
+  .navLink {
+    width: 80px;
+    font-size: 1rem;
+  }
+}

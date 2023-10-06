@@ -1,17 +1,62 @@
-import { createBrowserRouter } from 'react-router-dom';
 import React from 'react';
-import { LandingPage, AuthPage, NotFoundPage, RouteErrorElement } from './lazyPages';
+import { createBrowserRouter } from 'react-router-dom';
+import {
+  LandingPage,
+  AuthPage,
+  StatsPage,
+  AllJobsPage,
+  AddJobPage,
+  ProfilePage,
+  NotFoundPage,
+  RouteErrorElement,
+} from './lazyPages';
+import DashboardLayout from '@/pages/DashboardLayout/DashboardLayout';
+import { PrivateAuthRoute, PrivateDashboardRoute } from './privateRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LandingPage />,
+    element: (
+      <PrivateAuthRoute>
+        <LandingPage />
+      </PrivateAuthRoute>
+    ),
     errorElement: <RouteErrorElement />,
   },
   {
     path: '/auth',
-    element: <AuthPage />,
+    element: (
+      <PrivateAuthRoute>
+        <AuthPage />
+      </PrivateAuthRoute>
+    ),
     errorElement: <RouteErrorElement />,
+  },
+  {
+    element: (
+      <PrivateDashboardRoute>
+        <DashboardLayout />
+      </PrivateDashboardRoute>
+    ),
+    errorElement: <RouteErrorElement />,
+    children: [
+      {
+        path: '/stats',
+        element: <StatsPage />,
+      },
+      {
+        path: '/all-jobs',
+        element: <AllJobsPage />,
+      },
+      {
+        path: '/add-job',
+        element: <AddJobPage />,
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />,
+      },
+    ],
   },
   {
     path: '*',

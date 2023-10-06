@@ -1,3 +1,6 @@
+@import './styles/fonts.scss';
+@import './styles/normalize.scss';
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -120,12 +123,6 @@ h5 {
 
 input:focus {
   outline: 1px solid $primary-500;
-}
-
-button:focus {
-  outline-offset: 2px;
-  outline: 1px solid $focus-color;
-  border-radius: 3px;
 }
 
 .form-textarea,

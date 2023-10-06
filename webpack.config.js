@@ -64,16 +64,12 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          'postcss-loader',
           'sass-loader',
           {
             loader: 'sass-resources-loader',
             options: {
-              resources: [
-                './src/styles/variables.scss',
-                './src/styles/mixins.scss',
-                './src/styles/placeholders.scss',
-                './src/styles/global.scss',
-              ],
+              resources: ['./src/styles/variables.scss', './src/styles/mixins.scss', './src/styles/placeholders.scss'],
             },
           },
         ],

@@ -15,7 +15,7 @@ const RouteErrorElement = (): ReactElement => {
             contact our support.
           </a>
         </p>
-        <Link className={`btn ${styles.toHomeLink}`} to="/home">
+        <Link className={`btn ${styles.toHomeLink}`} to="/stats">
           back home
         </Link>
       </div>
