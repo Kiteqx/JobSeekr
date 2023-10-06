@@ -34,7 +34,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
   };
 
   return (
-    <form className={styles.form} onSubmit={(event): void => handleSubmit(event)}>
+    <form className={`form ${styles.form}`} onSubmit={(event): void => handleSubmit(event)}>
       <Logo className={styles.formLogo} />
       <h3 className={styles.formHeading}>Login</h3>
       <FormRow
@@ -44,7 +44,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         placeholder="Enter your email*"
         autoFocus={true}
         validateMessage={validateMessages.email}
-        handleInputChange={(event: ChangeEvent): void =>
+        onInputChange={(event: ChangeEvent): void =>
           handleInputChange(event, inputValues, setInputValues, setValidateMessages)
         }
       />
@@ -54,7 +54,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         value={password}
         placeholder="Enter your password*"
         validateMessage={validateMessages.password}
-        handleInputChange={(event: ChangeEvent): void =>
+        onInputChange={(event: ChangeEvent): void =>
           handleInputChange(event, inputValues, setInputValues, setValidateMessages)
         }
       />
@@ -63,8 +63,8 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         type="submit"
         disabled={
           isLoading ||
-          Object.entries(inputValues).some(([, inputValue]) => !inputValue) ||
-          Object.entries(validateMessages).some(([, errorMessage]) => !!errorMessage)
+          Object.values(inputValues).some(([inputValue]) => !inputValue) ||
+          Object.values(validateMessages).some(([errorMessage]) => !!errorMessage)
         }
       >
         submit

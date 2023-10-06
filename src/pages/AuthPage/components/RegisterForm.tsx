@@ -33,7 +33,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
   };
 
   return (
-    <form className={styles.form} onSubmit={(event): void => handleSubmit(event)}>
+    <form className={`form ${styles.form}`} onSubmit={(event): void => handleSubmit(event)}>
       <Logo className={styles.formLogo} />
       <h3 className={styles.formHeading}>Register</h3>
       <FormRow
@@ -43,7 +43,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         placeholder="Enter your name*"
         autoFocus={true}
         validateMessage={validateMessages.name}
-        handleInputChange={(event: ChangeEvent): void =>
+        onInputChange={(event: ChangeEvent): void =>
           handleInputChange(event, inputValues, setInputValues, setValidateMessages)
         }
       />
@@ -53,7 +53,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         value={email}
         placeholder="Enter your email*"
         validateMessage={validateMessages.email}
-        handleInputChange={(event: ChangeEvent): void =>
+        onInputChange={(event: ChangeEvent): void =>
           handleInputChange(event, inputValues, setInputValues, setValidateMessages)
         }
       />
@@ -63,7 +63,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         value={password}
         placeholder="Enter your password*"
         validateMessage={validateMessages.password}
-        handleInputChange={(event: ChangeEvent): void =>
+        onInputChange={(event: ChangeEvent): void =>
           handleInputChange(event, inputValues, setInputValues, setValidateMessages)
         }
       />
@@ -72,8 +72,8 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         type="submit"
         disabled={
           isLoading ||
-          Object.entries(inputValues).some(([, inputValue]) => !inputValue) ||
-          Object.entries(validateMessages).some(([, errorMessage]) => !!errorMessage)
+          Object.values(inputValues).some(([, inputValue]) => !inputValue) ||
+          Object.values(validateMessages).some(([, errorMessage]) => !!errorMessage)
         }
       >
         submit
