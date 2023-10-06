@@ -4,17 +4,31 @@ import NotificationMessages from '@/enums/notificationMessage';
 import { IUserState } from '@/interfaces/IRedux';
 import { showError, showSuccsess } from '@/utils/helpers/antd/antdConfig';
 import { registerUser, loginUser } from '../actions/userActions';
-import { addUserToLocalStorage, getUserFromLocalStorage } from '@/utils/helpers/localStorage';
+import {
+  addUserToLocalStorage,
+  getUserFromLocalStorage,
+  removeUserFromLocalStorage,
+} from '@/utils/helpers/localStorage';
 
 const initialState: IUserState = {
   user: getUserFromLocalStorage(),
+  isSidebarOpen: false,
   isLoading: false,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+    logoutUser: (state) => {
+      state.user = null;
+      state.isSidebarOpen = false;
+      removeUserFromLocalStorage();
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -46,4 +60,6 @@ const userSlice = createSlice({
   },
 });
 
+export const { toggleSidebar } = userSlice.actions;
+export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;
