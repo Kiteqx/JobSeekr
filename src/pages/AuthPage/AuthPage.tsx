@@ -1,5 +1,4 @@
-import React, { ChangeEvent, Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { ChangeEvent, Dispatch, ReactElement, SetStateAction, useState } from 'react';
 import styles from './AuthPage.module.scss';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
@@ -31,14 +30,7 @@ const AuthPage = (): ReactElement => {
   const [loginInputValues, setLoginInputValues] = useState(initialLoginInputValues);
   const [registerInputValues, setRegisterInputValues] = useState(initialRegisterInputValues);
   const [isMember, setIsMember] = useState(false);
-  const { user, isLoading } = useAppSelector((store) => store.user);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      navigate('/home');
-    }
-  }, [user]);
+  const isLoading = useAppSelector((store) => store.user.isLoading);
 
   return (
     <main className={styles.main}>
