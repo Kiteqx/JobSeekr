@@ -46,7 +46,7 @@ describe('Verification of the correctness of working out validation before submi
     const [formNameInput] = formInputsArray;
     fireEvent.change(formNameInput, { target: { value: '' } });
 
-    await waitFor(() => expect(screen.getByText(NotificationMessages.EMPTY_AUTH_FIELD)).toBeInTheDocument(), {
+    await waitFor(() => expect(screen.getByText(NotificationMessages.EMPTY_FIELD)).toBeInTheDocument(), {
       timeout: 5000,
     });
   });
@@ -72,7 +72,7 @@ describe('Verification of the correctness of working out validation before submi
     submitButton.disabled = false;
     fireEvent.click(submitButton);
 
-    await waitFor(() => expect(screen.getByText(NotificationMessages.EMPTY_AUTH_FIELDS)).toBeInTheDocument(), {
+    await waitFor(() => expect(screen.getByText(NotificationMessages.EMPTY_FIELDS)).toBeInTheDocument(), {
       timeout: 5000,
     });
   });
@@ -82,7 +82,7 @@ describe('Verification of the correctness of working out validation before submi
     submitButton.disabled = false;
     fireEvent.click(submitButton);
 
-    await waitFor(() => expect(screen.getByText(NotificationMessages.CHECK_AUTH_FIELDS_VALUE)).toBeInTheDocument(), {
+    await waitFor(() => expect(screen.getByText(NotificationMessages.CHECK_FIELDS_VALUE)).toBeInTheDocument(), {
       timeout: 5000,
     });
   });
@@ -132,7 +132,7 @@ describe('Verification of the correctness of working out validation before submi
     submitButton.disabled = false;
     fireEvent.click(submitButton);
 
-    await waitFor(() => expect(screen.getByText(NotificationMessages.CHECK_AUTH_FIELDS_VALUE)).toBeInTheDocument(), {
+    await waitFor(() => expect(screen.getByText(NotificationMessages.CHECK_FIELDS_VALUE)).toBeInTheDocument(), {
       timeout: 5000,
     });
   });
@@ -142,7 +142,7 @@ describe('Verification of the correctness of working out validation before submi
     submitButton.disabled = false;
     fireEvent.click(submitButton);
 
-    await waitFor(() => expect(screen.getByText(NotificationMessages.EMPTY_AUTH_FIELDS)).toBeInTheDocument(), {
+    await waitFor(() => expect(screen.getByText(NotificationMessages.EMPTY_FIELDS)).toBeInTheDocument(), {
       timeout: 5000,
     });
   });
