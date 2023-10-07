@@ -1,0 +1,80 @@
+.section {
+  padding: 2rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  background: $white;
+  box-shadow: $shadow-2;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.form {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.formRow {
+  margin-bottom: 0;
+}
+
+.formCenter {
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.formCenter button {
+  align-self: flex-end;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btnContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+  align-self: flex-end;
+  margin-top: 0.5rem;
+}
+
+.clearBtn {
+  background: $grey-500;
+}
+
+@media (hover: hover) {
+  .form:hover {
+    box-shadow: none;
+  }
+
+  .clearBtn:hover {
+    background: $black;
+  }
+}
+
+@media (min-width: $large-tablet) {
+  .formCenter {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  .btnContainer {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1120px) {
+  .formCenter {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .formCenter button {
+    margin-top: 0;
+  }
+}

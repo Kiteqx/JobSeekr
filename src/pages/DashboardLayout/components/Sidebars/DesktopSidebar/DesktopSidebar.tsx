@@ -14,7 +14,9 @@ const DesktopSidebar = (): ReactElement => {
           <header className={styles.header}>
             <Logo />
           </header>
-          <NavLinks />
+          <div className={styles.linksContainer}>
+            <NavLinks />
+          </div>
         </div>
       </div>
     </aside>

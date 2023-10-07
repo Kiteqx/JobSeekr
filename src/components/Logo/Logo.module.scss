@@ -11,7 +11,7 @@
 }
 
 .logoHeading {
-  font-size: 20px;
+  font-size: 1.5rem;
   letter-spacing: 2px;
   font-weight: 700;
   color: $primary-500;
@@ -28,17 +28,8 @@
   }
 }
 
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $large-tablet) {
   .logo-container {
     gap: 10px;
-  }
-
-  .logo {
-    width: 25px;
-    height: 25px;
-  }
-
-  .logoHeading {
-    font-size: 16px;
   }
 }

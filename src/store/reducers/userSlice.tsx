@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import NotificationMessages from '@/enums/notificationMessage';
 import { IUserState } from '@/interfaces/IRedux';
 import { showError, showSuccsess } from '@/utils/helpers/antd/antdConfig';
-import { registerUser, loginUser } from '../actions/userActions';
+import { registerUser, loginUser, updateUser } from '../actions/userActions';
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
@@ -24,6 +24,7 @@ const userSlice = createSlice({
       state.isSidebarOpen = !state.isSidebarOpen;
     },
     logoutUser: (state) => {
+      showSuccsess(`Good bye ${state.user?.name || ''}!`);
       state.user = null;
       state.isSidebarOpen = false;
       removeUserFromLocalStorage();
@@ -31,6 +32,8 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      // REGISTER USER
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -44,6 +47,8 @@ const userSlice = createSlice({
         addUserToLocalStorage(userData);
         showSuccsess(NotificationMessages.SUCCESSFUL_REGISTER);
       })
+
+      // LOGIN USER
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -56,6 +61,21 @@ const userSlice = createSlice({
         state.isLoading = false;
         addUserToLocalStorage(userData);
         showSuccsess(`${NotificationMessages.SUCCESSFUL_LOGIN}${` ${userData.name}!`}`);
+      })
+
+      // UPDATE USER
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUser.rejected, (state, { payload: errorMessage }) => {
+        state.isLoading = false;
+        showError(`${errorMessage}`);
+      })
+      .addCase(updateUser.fulfilled, (state, { payload: userData }) => {
+        state.user = userData;
+        state.isLoading = false;
+        addUserToLocalStorage(userData);
+        showSuccsess(NotificationMessages.SUCCESSFUL_UPDATE);
       });
   },
 });
