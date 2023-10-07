@@ -22,11 +22,11 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
 
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    const isAllInputValid = checkIsAllInputValid(inputValues, setValidateMessages);
-    if (!name || !email || !password) {
-      showNotification(NotificationMessages.EMPTY_AUTH_FIELDS);
-    } else if (!isAllInputValid) {
-      showNotification(NotificationMessages.CHECK_AUTH_FIELDS_VALUE);
+
+    if (Object.values(inputValues).some((value) => !value)) {
+      showNotification(NotificationMessages.EMPTY_FIELDS);
+    } else if (!checkIsAllInputValid(inputValues, setValidateMessages)) {
+      showNotification(NotificationMessages.CHECK_FIELDS_VALUE);
     } else {
       dispatch(registerUser(inputValues));
     }
@@ -35,7 +35,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
   return (
     <form className={`form ${styles.form}`} onSubmit={(event): void => handleSubmit(event)}>
       <Logo className={styles.formLogo} />
-      <h3 className={styles.formHeading}>Register</h3>
+      <h4 className={styles.formHeading}>Register</h4>
       <FormRow
         type="text"
         name="name"
@@ -76,7 +76,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
           Object.values(validateMessages).some(([, errorMessage]) => !!errorMessage)
         }
       >
-        submit
+        {isLoading ? 'Please wait...' : 'submit'}
       </button>
       <div className={styles.redirectBtnContainer}>
         {'Already a member?'}

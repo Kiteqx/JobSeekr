@@ -22,12 +22,11 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
 
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    const isAllInputValid = checkIsAllInputValid(inputValues, setValidateMessages);
 
-    if (!email || !password) {
-      showNotification(NotificationMessages.EMPTY_AUTH_FIELDS);
-    } else if (!isAllInputValid) {
-      showNotification(NotificationMessages.CHECK_AUTH_FIELDS_VALUE);
+    if (Object.values(inputValues).some((value) => !value)) {
+      showNotification(NotificationMessages.EMPTY_FIELDS);
+    } else if (!checkIsAllInputValid(inputValues, setValidateMessages)) {
+      showNotification(NotificationMessages.CHECK_FIELDS_VALUE);
     } else {
       dispatch(loginUser(inputValues));
     }
@@ -36,7 +35,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
   return (
     <form className={`form ${styles.form}`} onSubmit={(event): void => handleSubmit(event)}>
       <Logo className={styles.formLogo} />
-      <h3 className={styles.formHeading}>Login</h3>
+      <h4 className={styles.formHeading}>Login</h4>
       <FormRow
         type="text"
         name="email"
@@ -67,7 +66,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
           Object.values(validateMessages).some(([errorMessage]) => !!errorMessage)
         }
       >
-        submit
+        {isLoading ? 'Please wait...' : 'submit'}
       </button>
       <div className={styles.redirectBtnContainer}>
         {'Not a member yet?'}{' '}
