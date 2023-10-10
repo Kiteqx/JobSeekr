@@ -1,10 +1,9 @@
-import React, { ChangeEvent, Dispatch, ReactElement, SetStateAction, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styles from './AuthPage.module.scss';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import DataFetchingPreloader from '@/components/DataFetchingPreloader/DataFetchingPreloader';
 import { useAppSelector } from '@/utils/hooks/redux';
-import { checkIsInputValid } from '@/utils/helpers/validationSchemes/authSchema';
 
 const initialLoginInputValues: Record<string, string> = {
   email: '',
@@ -12,19 +11,6 @@ const initialLoginInputValues: Record<string, string> = {
 };
 
 const initialRegisterInputValues: Record<string, string> = { ...initialLoginInputValues, name: '' };
-
-export const handleInputChange = (
-  event: ChangeEvent,
-  inputValues: Record<string, string>,
-  setInputValues: Dispatch<SetStateAction<Record<string, string>>>,
-  setValidateMessages: Dispatch<SetStateAction<Record<string, string>>>
-): void => {
-  const input = event.target as HTMLInputElement;
-  const { value } = input;
-  const changedField = input.name;
-  checkIsInputValid(changedField, value, setValidateMessages);
-  setInputValues({ ...inputValues, [changedField]: value });
-};
 
 const AuthPage = (): ReactElement => {
   const [loginInputValues, setLoginInputValues] = useState(initialLoginInputValues);
@@ -36,11 +22,11 @@ const AuthPage = (): ReactElement => {
     <main className={styles.main}>
       {isLoading && <DataFetchingPreloader />}
       {isMember ? (
-        <LoginForm inputValues={loginInputValues} setInputValues={setLoginInputValues} setIsMember={setIsMember} />
+        <LoginForm inputsValues={loginInputValues} setInputsValues={setLoginInputValues} setIsMember={setIsMember} />
       ) : (
         <RegisterForm
-          inputValues={registerInputValues}
-          setInputValues={setRegisterInputValues}
+          inputsValues={registerInputValues}
+          setInputsValues={setRegisterInputValues}
           setIsMember={setIsMember}
         />
       )}

@@ -5,6 +5,7 @@ enum NotificationMessages {
   SUCCESSFUL_LOGIN = 'Welcome back',
   SUCCESSFUL_REGISTER = 'Registration was successful!',
   SUCCESSFUL_UPDATE = 'Your data was updated!',
+  SUCCESSFUL_ADD_JOB = 'Your work has been published successfully',
 }
 
 export default NotificationMessages;

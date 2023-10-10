@@ -14,7 +14,7 @@ const FormRow = ({
 }: IFormRowProps): ReactElement => {
   return (
     <div className={styles.FormRow}>
-      <label htmlFor={name} className={styles.formLabel}>
+      <label htmlFor={name} className="form-label">
         {labelText || name}
       </label>
       <input
