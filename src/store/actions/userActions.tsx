@@ -1,14 +1,11 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import APIEndpoints from '@/enums/APIEndpoints';
-import { IResponseUserData, IResponseError } from '@/interfaces/IAPI';
-import { logoutUser } from '../reducers/userSlice';
 import errorStatusCodes from '@/enums/errorStatusCodes';
-import { TThunkApiConfig } from '@/types/TRedux';
+import { logoutUser } from '../reducers/userSlice';
+import { IResponseUserData } from '@/interfaces/IAPI';
+import { createAsyncThunkWithTypes, createAuthHeaders, getErrorData } from '@/utils/helpers/asyncThunkHelper';
 
-const createUserAsyncThunk = createAsyncThunk.withTypes<TThunkApiConfig>();
-
-export const registerUser = createUserAsyncThunk(
+export const registerUser = createAsyncThunkWithTypes(
   'user/registerUser',
   async (inputValues: Record<string, string>, thunkAPI) => {
     try {
@@ -16,16 +13,13 @@ export const registerUser = createUserAsyncThunk(
         data: { user },
       }: IResponseUserData = await axios.post(APIEndpoints.URL_REGISTER, inputValues);
       return thunkAPI.fulfillWithValue(user);
-    } catch (e) {
-      const {
-        response: { data },
-      } = e as IResponseError;
-      return typeof data === 'object' ? thunkAPI.rejectWithValue(data.msg) : thunkAPI.rejectWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorData(error).errorMessage);
     }
   }
 );
 
-export const loginUser = createUserAsyncThunk(
+export const loginUser = createAsyncThunkWithTypes(
   'user/loginUser',
   async (inputValues: Record<string, string>, thunkAPI) => {
     try {
@@ -33,39 +27,30 @@ export const loginUser = createUserAsyncThunk(
         data: { user },
       }: IResponseUserData = await axios.post(APIEndpoints.URL_LOGIN, inputValues);
       return thunkAPI.fulfillWithValue(user);
-    } catch (e) {
-      const {
-        response: { data },
-      } = e as IResponseError;
-      return typeof data === 'object' ? thunkAPI.rejectWithValue(data.msg) : thunkAPI.rejectWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorData(error).errorMessage);
     }
   }
 );
 
-export const updateUser = createUserAsyncThunk(
+export const updateUser = createAsyncThunkWithTypes(
   'user/updateUser',
   async (inputValues: Record<string, string>, thunkAPI) => {
     try {
-      const userState = thunkAPI.getState().user.user;
       const {
         data: { user },
       }: IResponseUserData = await axios.patch(APIEndpoints.URL_UPDATE_USER, inputValues, {
-        headers: {
-          authorization: `Bearer ${userState?.token || ''}`,
-        },
+        headers: createAuthHeaders(),
       });
 
       return thunkAPI.fulfillWithValue(user);
-    } catch (e) {
-      const {
-        response: { status: statusCode, data },
-      } = e as IResponseError;
-
+    } catch (error) {
+      const { errorMessage, statusCode } = getErrorData(error);
       if (statusCode === errorStatusCodes.UNAUTHORIZER) {
         thunkAPI.dispatch(logoutUser());
-        return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
+        return thunkAPI.rejectWithValue('Oops, please relogin!');
       }
-      return typeof data === 'object' ? thunkAPI.rejectWithValue(data.msg) : thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

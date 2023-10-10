@@ -80,6 +80,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { toggleSidebar } = userSlice.actions;
-export const { logoutUser } = userSlice.actions;
+export const { logoutUser, toggleSidebar } = userSlice.actions;
 export default userSlice.reducer;
