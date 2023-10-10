@@ -1,11 +1,10 @@
-import React, { ChangeEvent, Dispatch, FormEvent, ReactElement, SetStateAction, useState } from 'react';
+import React, { ChangeEvent, Dispatch, ReactElement, SetStateAction, useState } from 'react';
 import styles from './ProfilePage.module.scss';
 import FormRow from '@/components/FormRow/FormRow';
+import { handleInputChange, handleSubmit } from '@/utils/helpers/form/formHelpers';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux';
-import { showNotification } from '@/utils/helpers/antd/antdConfig';
-import NotificationMessages from '@/enums/notificationMessage';
 import { updateUser } from '@/store/actions/userActions';
-import { checkIsAllInputValid, checkIsInputValid } from '@/utils/helpers/validationSchemes/authSchema';
+import validateSchema from '@/utils/helpers/form/authSchema';
 
 const ProfilePage = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -26,32 +25,15 @@ const ProfilePage = (): ReactElement => {
     Dispatch<SetStateAction<Record<string, string>>>,
   ] = useState({});
 
-  const handleInputChange = (event: ChangeEvent): void => {
-    const target = event.target as HTMLInputElement;
-    const newValue = target.value;
-    const { name: changedField } = target;
-
-    checkIsInputValid(changedField, newValue, setValidateMessages);
-    setInputsValues((prevState) => ({ ...prevState, [changedField]: target.value }));
-  };
-
-  const handleSubmit = (event: FormEvent): void => {
-    event.preventDefault();
-
-    if (Object.values(inputsValues).some((value) => !value)) {
-      showNotification(NotificationMessages.EMPTY_FIELDS);
-    } else if (!checkIsAllInputValid(inputsValues, setValidateMessages)) {
-      showNotification(NotificationMessages.CHECK_FIELDS_VALUE);
-    } else {
-      dispatch(updateUser(inputsValues));
-    }
-  };
-
   return (
     <section className={styles.section}>
-      <form className={`form ${styles.form}`} onSubmit={(event: FormEvent): void => handleSubmit(event)}>
+      <form
+        className={`form ${styles.form}`}
+        onSubmit={(event): void =>
+          handleSubmit(event, inputsValues, validateSchema, updateUser, dispatch, setValidateMessages)
+        }
+      >
         <h3>Profile</h3>
-
         <div className={styles.formCenter}>
           <FormRow
             type="text"
@@ -59,7 +41,9 @@ const ProfilePage = (): ReactElement => {
             value={inputsValues.name}
             placeholder="Enter new name*"
             validateMessage={validateMessages.name}
-            onInputChange={handleInputChange}
+            onInputChange={(event: ChangeEvent): void =>
+              handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
+            }
           />
           <FormRow
             type="text"
@@ -68,7 +52,9 @@ const ProfilePage = (): ReactElement => {
             value={inputsValues.lastName}
             placeholder="Enter new last name*"
             validateMessage={validateMessages.lastName}
-            onInputChange={handleInputChange}
+            onInputChange={(event: ChangeEvent): void =>
+              handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
+            }
           />
           <FormRow
             type="email"
@@ -76,7 +62,9 @@ const ProfilePage = (): ReactElement => {
             value={inputsValues.email}
             placeholder="Enter new email*"
             validateMessage={validateMessages.email}
-            onInputChange={handleInputChange}
+            onInputChange={(event: ChangeEvent): void =>
+              handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
+            }
           />
           <FormRow
             type="text"
@@ -84,7 +72,9 @@ const ProfilePage = (): ReactElement => {
             value={inputsValues.location}
             placeholder="Enter new location*"
             validateMessage={validateMessages.location}
-            onInputChange={handleInputChange}
+            onInputChange={(event: ChangeEvent): void =>
+              handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
+            }
           />
           <button
             className="btn btn-block"
