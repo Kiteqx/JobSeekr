@@ -12,7 +12,20 @@ export interface IFormRowProps {
 }
 
 export interface IAuthFormProps {
-  inputValues: Record<string, string>;
+  inputsValues: Record<string, string>;
   setIsMember: Dispatch<SetStateAction<boolean>>;
-  setInputValues: Dispatch<SetStateAction<Record<string, string>>>;
+  setInputsValues: Dispatch<SetStateAction<Record<string, string>>>;
+}
+
+export interface IFormSelectProps {
+  labelText: string;
+  name: string;
+  value: string;
+  list: string[];
+  onChange: (event: ChangeEvent) => void;
+}
+
+export interface IValidationRule {
+  match: RegExp;
+  message: string;
 }

@@ -21,8 +21,29 @@ export interface IResponseError {
   response: {
     status: number;
     statusText: string;
-    data: {
-      msg: string;
+    data:
+      | string
+      | {
+          msg: string;
+        };
+  };
+}
+
+export interface IResponseCreateJob {
+  status: number;
+  statusText: string;
+  data: {
+    job: {
+      company: string;
+      createdAt: string;
+      createdBy: string;
+      jobLocation: string;
+      jobType: string;
+      position: string;
+      status: string;
+      updatedAt: string;
+      __v: string;
+      _id: string;
     };
   };
 }
