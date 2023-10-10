@@ -18,7 +18,7 @@ const LazyComponent = (importFunction: () => Promise<{ default: ComponentType<un
 
 export const LandingPage = LazyComponent(async () => {
   await delay();
-  return import(/* webpackChunkName: "pages/stats/stats" */ '@/pages/LandingPage/LandingPage');
+  return import(/* webpackChunkName: "pages/landing/landing" */ '@/pages/LandingPage/LandingPage');
 });
 
 export const AuthPage = LazyComponent(async () => {
@@ -28,7 +28,7 @@ export const AuthPage = LazyComponent(async () => {
 
 export const StatsPage = LazyComponent(async () => {
   await delay();
-  return import(/* webpackChunkName: "pages/auth/auth" */ '@/pages/StatsPage/StatsPage');
+  return import(/* webpackChunkName: "pages/stats/stats" */ '@/pages/StatsPage/StatsPage');
 });
 
 export const AllJobsPage = LazyComponent(async () => {
