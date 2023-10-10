@@ -130,8 +130,23 @@ h5 {
   transition: $transition;
 }
 
-input:focus {
+input:focus,
+.form-select:focus {
   outline: 1px solid $primary-500;
+}
+
+select option {
+  font-size: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
 .form-textarea,
