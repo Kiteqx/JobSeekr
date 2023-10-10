@@ -1,17 +1,15 @@
-import React, { ReactElement, ChangeEvent, FormEvent, useState, Dispatch, SetStateAction } from 'react';
+import React, { ReactElement, ChangeEvent, useState, Dispatch, SetStateAction } from 'react';
 import Logo from '@/components/Logo/Logo';
 import styles from '../AuthPage.module.scss';
 import FormRow from '@/components/FormRow/FormRow';
-import NotificationMessages from '@/enums/notificationMessage';
-import { showNotification } from '@/utils/helpers/antd/antdConfig';
-import { loginUser } from '@/store/actions/userActions';
+import { handleInputChange, handleSubmit } from '@/utils/helpers/form/formHelpers';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux';
-import { handleInputChange } from '../AuthPage';
-import { checkIsAllInputValid } from '@/utils/helpers/validationSchemes/authSchema';
+import validateSchema from '@/utils/helpers/form/authSchema';
 import { IAuthFormProps } from '@/interfaces/IComponents';
+import { loginUser } from '@/store/actions/userActions';
 
-const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps): ReactElement => {
-  const { email, password } = inputValues;
+const LoginForm = ({ inputsValues, setInputsValues, setIsMember }: IAuthFormProps): ReactElement => {
+  const { email, password } = inputsValues;
   const [validateMessages, setValidateMessages]: [
     Record<string, string>,
     Dispatch<SetStateAction<Record<string, string>>>,
@@ -20,20 +18,13 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
   const isLoading = useAppSelector((store) => store.user.isLoading);
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (event: FormEvent): void => {
-    event.preventDefault();
-
-    if (Object.values(inputValues).some((value) => !value)) {
-      showNotification(NotificationMessages.EMPTY_FIELDS);
-    } else if (!checkIsAllInputValid(inputValues, setValidateMessages)) {
-      showNotification(NotificationMessages.CHECK_FIELDS_VALUE);
-    } else {
-      dispatch(loginUser(inputValues));
-    }
-  };
-
   return (
-    <form className={`form ${styles.form}`} onSubmit={(event): void => handleSubmit(event)}>
+    <form
+      className={`form ${styles.form}`}
+      onSubmit={(event): void =>
+        handleSubmit(event, inputsValues, validateSchema, loginUser, dispatch, setValidateMessages)
+      }
+    >
       <Logo className={styles.formLogo} />
       <h4 className={styles.formHeading}>Login</h4>
       <FormRow
@@ -44,7 +35,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         autoFocus={true}
         validateMessage={validateMessages.email}
         onInputChange={(event: ChangeEvent): void =>
-          handleInputChange(event, inputValues, setInputValues, setValidateMessages)
+          handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
         }
       />
       <FormRow
@@ -54,7 +45,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         placeholder="Enter your password*"
         validateMessage={validateMessages.password}
         onInputChange={(event: ChangeEvent): void =>
-          handleInputChange(event, inputValues, setInputValues, setValidateMessages)
+          handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
         }
       />
       <button
@@ -62,7 +53,7 @@ const LoginForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps)
         type="submit"
         disabled={
           isLoading ||
-          Object.values(inputValues).some(([inputValue]) => !inputValue) ||
+          Object.values(inputsValues).some(([inputValue]) => !inputValue) ||
           Object.values(validateMessages).some(([errorMessage]) => !!errorMessage)
         }
       >

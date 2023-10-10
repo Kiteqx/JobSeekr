@@ -1,17 +1,16 @@
-import React, { ReactElement, ChangeEvent, FormEvent, useState, Dispatch, SetStateAction } from 'react';
+import React, { ReactElement, ChangeEvent, useState, Dispatch, SetStateAction } from 'react';
 import Logo from '@/components/Logo/Logo';
 import styles from '../AuthPage.module.scss';
 import FormRow from '@/components/FormRow/FormRow';
-import NotificationMessages from '@/enums/notificationMessage';
-import { showNotification } from '@/utils/helpers/antd/antdConfig';
+import validateSchema from '@/utils/helpers/form/authSchema';
+
+import { IAuthFormProps } from '@/interfaces/IComponents';
 import { registerUser } from '@/store/actions/userActions';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux';
-import { handleInputChange } from '../AuthPage';
-import { checkIsAllInputValid } from '@/utils/helpers/validationSchemes/authSchema';
-import { IAuthFormProps } from '@/interfaces/IComponents';
+import { handleInputChange, handleSubmit } from '@/utils/helpers/form/formHelpers';
 
-const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormProps): ReactElement => {
-  const { name, email, password } = inputValues;
+const RegisterForm = ({ inputsValues, setInputsValues, setIsMember }: IAuthFormProps): ReactElement => {
+  const { name, email, password } = inputsValues;
   const [validateMessages, setValidateMessages]: [
     Record<string, string>,
     Dispatch<SetStateAction<Record<string, string>>>,
@@ -20,20 +19,13 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
   const isLoading = useAppSelector((store) => store.user.isLoading);
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (event: FormEvent): void => {
-    event.preventDefault();
-
-    if (Object.values(inputValues).some((value) => !value)) {
-      showNotification(NotificationMessages.EMPTY_FIELDS);
-    } else if (!checkIsAllInputValid(inputValues, setValidateMessages)) {
-      showNotification(NotificationMessages.CHECK_FIELDS_VALUE);
-    } else {
-      dispatch(registerUser(inputValues));
-    }
-  };
-
   return (
-    <form className={`form ${styles.form}`} onSubmit={(event): void => handleSubmit(event)}>
+    <form
+      className={`form ${styles.form}`}
+      onSubmit={(event): void =>
+        handleSubmit(event, inputsValues, validateSchema, registerUser, dispatch, setValidateMessages)
+      }
+    >
       <Logo className={styles.formLogo} />
       <h4 className={styles.formHeading}>Register</h4>
       <FormRow
@@ -44,7 +36,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         autoFocus={true}
         validateMessage={validateMessages.name}
         onInputChange={(event: ChangeEvent): void =>
-          handleInputChange(event, inputValues, setInputValues, setValidateMessages)
+          handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
         }
       />
       <FormRow
@@ -54,7 +46,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         placeholder="Enter your email*"
         validateMessage={validateMessages.email}
         onInputChange={(event: ChangeEvent): void =>
-          handleInputChange(event, inputValues, setInputValues, setValidateMessages)
+          handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
         }
       />
       <FormRow
@@ -64,7 +56,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         placeholder="Enter your password*"
         validateMessage={validateMessages.password}
         onInputChange={(event: ChangeEvent): void =>
-          handleInputChange(event, inputValues, setInputValues, setValidateMessages)
+          handleInputChange(event, inputsValues, validateSchema, setInputsValues, setValidateMessages)
         }
       />
       <button
@@ -72,7 +64,7 @@ const RegisterForm = ({ inputValues, setInputValues, setIsMember }: IAuthFormPro
         type="submit"
         disabled={
           isLoading ||
-          Object.values(inputValues).some(([, inputValue]) => !inputValue) ||
+          Object.values(inputsValues).some(([, inputValue]) => !inputValue) ||
           Object.values(validateMessages).some(([, errorMessage]) => !!errorMessage)
         }
       >
