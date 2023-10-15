@@ -1,9 +1,7 @@
 import axios from 'axios';
 import APIEndpoints from '@/enums/APIEndpoints';
-import errorStatusCodes from '@/enums/errorStatusCodes';
-import { logoutUser } from '../reducers/userSlice';
 import { IResponseUserData } from '@/interfaces/IAPI';
-import { createAsyncThunkWithTypes, createAuthHeaders, getErrorData } from '@/utils/helpers/asyncThunkHelper';
+import { createAsyncThunkWithTypes, createAuthHeaders, handleThunkErrors } from '@/utils/helpers/asyncThunkHelpers';
 
 export const registerUser = createAsyncThunkWithTypes(
   'user/registerUser',
@@ -14,7 +12,7 @@ export const registerUser = createAsyncThunkWithTypes(
       }: IResponseUserData = await axios.post(APIEndpoints.URL_REGISTER, inputValues);
       return thunkAPI.fulfillWithValue(user);
     } catch (error) {
-      return thunkAPI.rejectWithValue(getErrorData(error).errorMessage);
+      return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
     }
   }
 );
@@ -28,7 +26,7 @@ export const loginUser = createAsyncThunkWithTypes(
       }: IResponseUserData = await axios.post(APIEndpoints.URL_LOGIN, inputValues);
       return thunkAPI.fulfillWithValue(user);
     } catch (error) {
-      return thunkAPI.rejectWithValue(getErrorData(error).errorMessage);
+      return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
     }
   }
 );
@@ -45,12 +43,7 @@ export const updateUser = createAsyncThunkWithTypes(
 
       return thunkAPI.fulfillWithValue(user);
     } catch (error) {
-      const { errorMessage, statusCode } = getErrorData(error);
-      if (statusCode === errorStatusCodes.UNAUTHORIZER) {
-        thunkAPI.dispatch(logoutUser());
-        return thunkAPI.rejectWithValue('Oops, please relogin!');
-      }
-      return thunkAPI.rejectWithValue(errorMessage);
+      return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
     }
   }
 );

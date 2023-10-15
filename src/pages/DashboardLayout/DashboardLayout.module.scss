@@ -4,17 +4,20 @@
 }
 
 .dashboardPage {
+  position: relative;
   margin: 0 auto;
   padding: 2rem 0;
   width: 90vw;
+  height: calc(100vh - 4rem);
 }
 
-@media (min-width: $large-tablet) {
+@media (min-width: $tablet) {
   .dashboard {
     grid-template-columns: auto 1fr;
   }
 
   .dashboardPage {
     width: 90%;
+    height: calc(100% - 6rem);
   }
 }

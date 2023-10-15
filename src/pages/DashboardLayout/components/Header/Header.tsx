@@ -2,7 +2,8 @@ import React, { ReactElement, useState } from 'react';
 import { FaAlignLeft, FaUserCircle, FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import styles from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux';
-import { toggleSidebar, logoutUser } from '@/store/reducers/userSlice';
+import { toggleSidebar } from '@/store/reducers/userSlice';
+import { clearAllStore } from '@/store/store';
 
 const Header = (): ReactElement => {
   const [shouldShowLogout, setShouldShowLogout] = useState(false);
@@ -10,7 +11,7 @@ const Header = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const handleLogoutUser = (): void => {
-    dispatch(logoutUser());
+    dispatch(clearAllStore());
   };
 
   const handleToggleSidebar = (): void => {

@@ -1,0 +1,58 @@
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  height: 6rem;
+}
+
+.btnContainer {
+  background: $primary-100;
+  border-radius: 0.25rem;
+}
+
+.pageBtn {
+  width: 50px;
+  height: 40px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: $primary-500;
+  border-color: transparent;
+  background: transparent;
+  border-radius: 0.25rem;
+  transition: $transition;
+  cursor: pointer;
+}
+
+.active {
+  background: $primary-500;
+  color: $white;
+}
+
+.prevBtn,
+.nextBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100px;
+  height: 40px;
+  background: $white;
+  border-color: transparent;
+  border-radius: 0.25rem;
+  color: $primary-500;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  transition: $transition;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .prevBtn:hover,
+  .nextBtn:hover {
+    background: $primary-500;
+    color: $white;
+  }
+}

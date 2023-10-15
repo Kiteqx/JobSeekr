@@ -1,0 +1,25 @@
+.section {
+  margin-top: 3rem;
+}
+
+.noJobsHeading {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.jobsQuantity {
+  margin-bottom: 1rem;
+}
+
+.jobs {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2rem;
+}
+
+@media (min-width: $small-desktop) {
+  .jobs {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
