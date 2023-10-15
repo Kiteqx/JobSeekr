@@ -21,7 +21,7 @@ const MobileSidebar = (): ReactElement => {
           <button className={styles.closeBtn} onClick={handleToggleSidebar}>
             <FaTimes />
           </button>
-          <header>
+          <header className={styles.header}>
             <Logo />
           </header>
           <div className={styles.navLinks}>
