@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import styles from './AuthPage.module.scss';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-import DataFetchingPreloader from '@/components/DataFetchingPreloader/DataFetchingPreloader';
+import Preloader from '@/components/Preloader/Preloader';
 import { useAppSelector } from '@/utils/hooks/redux';
 
 const initialLoginInputValues: Record<string, string> = {
@@ -20,7 +20,7 @@ const AuthPage = (): ReactElement => {
 
   return (
     <main className={styles.main}>
-      {isLoading && <DataFetchingPreloader />}
+      {isLoading && <Preloader containerClassname="cornerLoaderContainer" />}
       {isMember ? (
         <LoginForm inputsValues={loginInputValues} setInputsValues={setLoginInputValues} setIsMember={setIsMember} />
       ) : (
