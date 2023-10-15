@@ -1,4 +1,5 @@
 import { IResponseUserData } from './IAPI';
+import { IJobItemProps } from './IComponents';
 
 export interface IUserState {
   user: Pick<IResponseUserData['data'], 'user'>['user'] | null;
@@ -17,4 +18,19 @@ export interface IJobState {
   status: string;
   isEditing: boolean;
   editJobId: string;
+}
+
+export interface IAllJobsState {
+  isLoading: boolean;
+  jobs: IJobItemProps[];
+  totalJobs: number;
+  numOfPages: number;
+  currentPage: number;
+  stats: object;
+  monthlyApplications: string[];
+  search: string;
+  searchStatus: string;
+  searchType: string;
+  sort: string;
+  sortOptions: string[];
 }

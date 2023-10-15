@@ -25,6 +25,16 @@ export interface IFormSelectProps {
   onChange: (event: ChangeEvent) => void;
 }
 
+export interface IJobItemProps {
+  _id: string;
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobType: string;
+  createdAt: string;
+  status: string;
+}
+
 export interface IValidationRule {
   match: RegExp;
   message: string;
