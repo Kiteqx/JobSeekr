@@ -1,10 +1,8 @@
 import axios from 'axios';
 import APIEndpoints from '@/enums/APIEndpoints';
-import errorStatusCodes from '@/enums/errorStatusCodes';
-import { logoutUser } from '../reducers/userSlice';
-import { IResponseCreateJob } from '@/interfaces/IAPI';
-import { handleResetState } from '../reducers/jobSlice';
-import { createAsyncThunkWithTypes, createAuthHeaders, getErrorData } from '@/utils/helpers/asyncThunkHelper';
+import { IResponseCreateJob, IResponseEditJob } from '@/interfaces/IAPI';
+import { createAsyncThunkWithTypes, createAuthHeaders, handleThunkErrors } from '@/utils/helpers/asyncThunkHelpers';
+import { clearAddJobState } from '../reducers/jobSlice';
 
 interface ICreateJobThunkArg {
   position: string;
@@ -12,6 +10,17 @@ interface ICreateJobThunkArg {
   jobLocation: string;
   jobType: string;
   status: string;
+}
+
+interface IEditJobThunkArg {
+  jobId: string;
+  jobData: {
+    position: string;
+    company: string;
+    jobLocation: string;
+    jobType: string;
+    status: string;
+  };
 }
 
 export const createJob = createAsyncThunkWithTypes(
@@ -24,34 +33,28 @@ export const createJob = createAsyncThunkWithTypes(
         headers: createAuthHeaders(),
       });
 
-      thunkAPI.dispatch(handleResetState());
+      thunkAPI.dispatch(clearAddJobState());
       return thunkAPI.fulfillWithValue(jobData);
     } catch (error) {
-      const { errorMessage, statusCode } = getErrorData(error);
-      if (statusCode === errorStatusCodes.UNAUTHORIZER) {
-        thunkAPI.dispatch(logoutUser());
-        return thunkAPI.rejectWithValue('Oops, please relogin!');
-      }
-      return thunkAPI.rejectWithValue(errorMessage);
+      return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
     }
   }
 );
 
-export const deleteJob = createAsyncThunkWithTypes('job/deleteJob', async (jobId, thunkAPI) => {
-  // thunkAPI.dispatch(showLoading());  TODO
-  try {
-    const resp = await axios.delete(`${APIEndpoints.URL_JOBS}/${jobId}`, {
-      headers: createAuthHeaders(),
-    });
-    // thunkAPI.dispatch(getAllJobs()); TODO
-    return resp.data;
-  } catch (error) {
-    // thunkAPI.dispatch(hideLoading()); TODO
-    const { errorMessage, statusCode } = getErrorData(error);
-    if (statusCode === errorStatusCodes.UNAUTHORIZER) {
-      thunkAPI.dispatch(logoutUser());
-      return thunkAPI.rejectWithValue('Oops, please relogin!');
+export const editJob = createAsyncThunkWithTypes(
+  'job/editJob',
+  async ({ jobId, jobData }: IEditJobThunkArg, thunkAPI) => {
+    try {
+      const {
+        data: { updatedJob },
+      }: IResponseEditJob = await axios.patch(`${APIEndpoints.URL_JOBS}/${jobId}`, jobData, {
+        headers: createAuthHeaders(),
+      });
+
+      thunkAPI.dispatch(clearAddJobState());
+      return thunkAPI.fulfillWithValue(updatedJob);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
     }
-    return thunkAPI.rejectWithValue(errorMessage);
   }
-});
+);
