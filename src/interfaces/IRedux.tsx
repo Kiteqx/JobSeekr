@@ -1,4 +1,4 @@
-import { IResponseUserData } from './IAPI';
+import { IResponseGetStats, IResponseUserData } from './IAPI';
 import { IJobItemProps } from './IComponents';
 
 export interface IUserState {
@@ -26,8 +26,8 @@ export interface IAllJobsState {
   totalJobs: number;
   numOfPages: number;
   currentPage: number;
-  stats: object;
-  monthlyApplications: string[];
+  stats: Pick<IResponseGetStats['data'], 'defaultStats'>['defaultStats'];
+  monthlyApplications: Pick<IResponseGetStats['data'], 'monthlyApplications'>['monthlyApplications'];
   search: string;
   searchStatus: string;
   searchType: string;
