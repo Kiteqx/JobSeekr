@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllJobs, deleteJob } from '../actions/allJobsActions';
+import { getAllJobs, deleteJob, getStats } from '../actions/allJobsActions';
 import { showError, showSuccsess } from '@/utils/helpers/antd/antdConfig';
 import { IAllJobsState } from '@/interfaces/IRedux';
 import NotificationMessages from '@/enums/notificationMessage';
@@ -19,7 +19,11 @@ const initialState: IAllJobsState = {
   totalJobs: 0,
   numOfPages: 1,
   currentPage: 1,
-  stats: {},
+  stats: {
+    pending: 0,
+    declined: 0,
+    interview: 0,
+  },
   monthlyApplications: [],
   ...initialFiltersState,
 };
@@ -68,6 +72,20 @@ const allJobsSlice = createSlice({
       .addCase(deleteJob.fulfilled, (state) => {
         state.isLoading = false;
         showSuccsess(NotificationMessages.SUCCESSFUL_DELETE_JOB);
+      })
+
+      // GET STATS
+      .addCase(getStats.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getStats.rejected, (state, { payload: errorMessage }) => {
+        state.isLoading = false;
+        showError(`${errorMessage}`);
+      })
+      .addCase(getStats.fulfilled, (state, { payload: { defaultStats, monthlyApplications } }) => {
+        state.isLoading = false;
+        state.stats = defaultStats;
+        state.monthlyApplications = monthlyApplications;
       });
   },
 });
