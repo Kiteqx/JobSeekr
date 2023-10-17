@@ -33,7 +33,7 @@ If you encounter any issues, have questions, or need assistance with application
 
 This application is developed by:
 
-- Aleksandr Dimkov ([GitHub](https://github.com/DiegoKitty), [GitLab](https://gitlab.com/DiegoKitty))
+- Alexandr Dimkov ([GitHub](https://github.com/DiegoKitty), [GitLab](https://gitlab.com/DiegoKitty))
 
 ---
 
