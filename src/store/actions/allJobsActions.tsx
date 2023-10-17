@@ -1,6 +1,6 @@
 import axios from 'axios';
 import APIEndpoints from '@/enums/APIEndpoints';
-import { IResponseDeleteJob, IResponseGetAllJobs } from '@/interfaces/IAPI';
+import { IResponseDeleteJob, IResponseGetAllJobs, IResponseGetStats } from '@/interfaces/IAPI';
 import {
   createAsyncThunkWithTypes,
   createAuthHeaders,
@@ -34,6 +34,18 @@ export const deleteJob = createAsyncThunkWithTypes('allJobs/deleteJob', async (j
 
     await thunkAPI.dispatch(getAllJobs());
     return thunkAPI.fulfillWithValue(msg);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
+  }
+});
+
+export const getStats = createAsyncThunkWithTypes('allJobs/stats', async (_, thunkAPI) => {
+  try {
+    const { data }: IResponseGetStats = await axios.get(`${APIEndpoints.URL_STATS}`, {
+      headers: createAuthHeaders(),
+    });
+
+    return thunkAPI.fulfillWithValue(data);
   } catch (error) {
     return thunkAPI.rejectWithValue(handleThunkErrors(error, thunkAPI));
   }
