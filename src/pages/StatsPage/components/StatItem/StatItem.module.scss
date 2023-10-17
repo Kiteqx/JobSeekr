@@ -1,0 +1,39 @@
+.article {
+  padding: 2rem;
+  background: $white;
+  border-radius: 0.25rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.count {
+  display: block;
+  font-weight: 700;
+  font-size: 50px;
+}
+
+.title {
+  margin: 0;
+  margin-top: 0.5rem;
+  text-align: left;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 60px;
+  border-radius: 0.25rem;
+
+  & > svg {
+    font-size: 2rem;
+    //   color: ${(props) => props.color};
+  }
+}
