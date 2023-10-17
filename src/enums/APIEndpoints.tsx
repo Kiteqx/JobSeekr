@@ -5,6 +5,7 @@ enum APIEndpoints {
   URL_LOGIN = 'https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/login',
   URL_UPDATE_USER = 'https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/updateUser',
   URL_JOBS = 'https://jobify-prod.herokuapp.com/api/v1/toolkit/jobs',
+  URL_STATS = 'https://jobify-prod.herokuapp.com/api/v1/toolkit/jobs/stats',
 }
 
 export default APIEndpoints;

@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, ReactElement, SetStateAction } from 'react';
 
 export interface IFormRowProps {
   type: string;
@@ -33,6 +33,14 @@ export interface IJobItemProps {
   jobType: string;
   createdAt: string;
   status: string;
+}
+
+export interface IStatItemProps {
+  count: number;
+  title: string;
+  icon: ReactElement;
+  color: string;
+  bcg: string;
 }
 
 export interface IValidationRule {

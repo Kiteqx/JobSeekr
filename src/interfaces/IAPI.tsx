@@ -55,6 +55,22 @@ export interface IResponseDeleteJob {
   data: { msg: string };
 }
 
+export interface IResponseGetStats {
+  status: number;
+  statusText: string;
+  data: {
+    defaultStats: {
+      declined: number;
+      interview: number;
+      pending: number;
+    };
+    monthlyApplications: {
+      count: number;
+      date: string;
+    }[];
+  };
+}
+
 export interface IResponseError {
   type: string;
   error: { message: string };
