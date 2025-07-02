@@ -1,6 +1,6 @@
 # JobSeekr Application 🌐
 
-Welcome to [JobSeekr application](https://diegokitty-jobseekr.netlify.app/)! This application provides users with a convenient way to track their job application progress. It allows you to perform all essential job application-related operations, including creating, editing, deleting, and viewing all your job applications. 
+Welcome to [JobSeekr application](https://kiteqx-jobseekr.netlify.app/)! This application provides users with a convenient way to track their job application progress. It allows you to perform all essential job application-related operations, including creating, editing, deleting, and viewing all your job applications. 
 
 
 ## What the project does
@@ -19,7 +19,7 @@ This application offers the following key features:
 
 ## How users can get started with the project
 
-To get started with this project, follow this [steps](https://github.com/DiegoKitty/JobSeekr/tree/develop#readme).
+To get started with this project, follow this [steps](https://github.com/kiteqx/JobSeekr/tree/develop#readme).
 
 ## Where users can get help with the project
 
@@ -33,7 +33,7 @@ If you encounter any issues, have questions, or need assistance with application
 
 This application is developed by:
 
-- Alexandr Dimkov ([GitHub](https://github.com/DiegoKitty), [GitLab](https://gitlab.com/DiegoKitty))
+- Aleksandr Iurevich ([GitHub](https://github.com/kiteqx), [GitLab](https://gitlab.com/kiteqx))
 
 ---
 
